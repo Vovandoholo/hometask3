@@ -32,20 +32,21 @@ console.log(getArraysNotEqualElementsCount([5, 6, 7, 8], [5, 6, 7, 8]));
 //идешь по arr1 при помощи reduce, результатом указываешь arr2, в результат всегда выпадает arr2, в нем нужно найти значение, если это значение найдено
 // то удаляем его с помощью filter и потом count++, это если if, а если else то просто вернуть текущий результат
 function getArraysEqualElementsCountHard(arr1, arr2) {
+  // debugger
   let count = 0;
-      return arr1.reduce(function (result, item) {
-        debugger
+       arr1.reduce(function (result, item) {
         let lookingForElement = result.find(function(el) {
           return el === item;
         })
         if (item === lookingForElement) {
           result = result.filter(function(el) {return el !== lookingForElement
           })
-          count++;
+           count++;
         };
         return result;
       },arr2);
-    }
+return count;
+}
   console.log(getArraysEqualElementsCountHard([1, 2, 3, 'e', 'e', 'd', 'e', 'e', 'd'], ['a', 'b', 'c', 'd', 'e']));
 
 
