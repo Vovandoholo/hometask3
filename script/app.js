@@ -31,58 +31,28 @@ console.log(getArraysNotEqualElementsCount([5, 6, 7, 8], [5, 6, 7, 8]));
 //но теперь элементы массива могут идти не подряд, а как попало, но функция должна работать правильно
 //идешь по arr1 при помощи reduce, результатом указываешь arr2, в результат всегда выпадает arr2, в нем нужно найти значение, если это значение найдено
 // то удаляем его с помощью filter и потом count++, это если if, а если else то просто вернуть текущий результат
+//нужно находить индекс, вместо find делать findIndex, если Index найден, то необходимо удалить элемент по индексу
+
+
+
 function getArraysEqualElementsCountHard(arr1, arr2) {
-  // debugger
   let count = 0;
-       arr1.reduce(function (result, item) {
-        let lookingForElement = result.find(function(el) {
-          return el === item;
-        })
-        if (item === lookingForElement) {
-          result = result.filter(function(el) {return el !== lookingForElement
-          })
-           count++;
-        };
-        return result;
-      },arr2);
+  arr1.reduce(function (result, item) {
+    let lookingForElement = result.findIndex(function(el){
+      return el ===item;
+    })
+    if (lookingForElement !== -1) {
+      result.splice (lookingForElement,1);
+      count++
+    }
+    return result;
+  },arr2);
 return count;
 }
-  console.log(getArraysEqualElementsCountHard([1, 2, 3, 'e', 'e', 'd', 'e', 'e', 'd'], ['a', 'b', 'c', 'd', 'e']));
+
+console.log(getArraysEqualElementsCountHard([1, 1, 1, 'e', 'e', 'd', 'e', 'e', 'd'], [1,1,1,1,1,1,1,1,1,1,'e','a', 'b', 'c', 'd', 'e']));
 
 
-// let num = [1,2,3,4,5];
-// function filterShortNames(arr) {
-//   let result = arr.filter(function(num) {
-//     if (true) {return true;}
-//   });
-//   return result;
-// }
-// console.log(filterShortNames(num))
-
-
-
-
-
-
-
-
-
-  /*  let count = 0;
-    for (let i = 0; i < arr1.length; i++) {
-        for(let k = 0; k < arr2.length; k++) {
-            if (arr1[i] === arr2[k]) {
-                delete arr1[i];
-                delete arr2[k];
-                console.log(arr1, arr2)
-                count++;
-                break;
-            }
-
-        }
-    }
-    return count;*/
-
-/*
 
 // 4.getArrayElementsInARowAmount, которая возвращает количество раз, когда встретились два одинаковых элемента подряд.
 function getArrayElementsInARowAmount(arr) {
